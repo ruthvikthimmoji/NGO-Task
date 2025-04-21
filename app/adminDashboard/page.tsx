@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true)
   const [barGraphData, setBarGraphData] = useState<{ month: string; people: number }[]>([])
   const [pieChartData, setPieChartData] = useState<{ month: string; people: number }[]>([])
-  const [latestEntries, setLatestEntries] = useState<any[]>([])
+  const [latestEntries, setLatestEntries] = useState<EventReport[]>([])
 
 
 
@@ -33,13 +33,21 @@ const AdminDashboard = () => {
       setPieChartData (data.map((item)=>({
         month: item.month, // assuming `month` column exists
         people: item.people      })))
-
-        setPieChartData (data.map((item)=>({
-          month: item.event, // assuming `month` column exists
-          people: item.funds      })))
+        
       //set pie chart data similar way
     }
   }
+
+  interface EventReport {
+    id: string
+    ngo_id: string
+    month: string
+    event: string
+    people: number
+    funds: number
+    created_at?: string
+  }
+  
 
   useEffect(() => {
     const checkSession = async () => {
