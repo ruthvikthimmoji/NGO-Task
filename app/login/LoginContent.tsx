@@ -11,11 +11,19 @@ const LoginPage = () => {
   const [error, setError] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
   const [heading, setHeading] = useState('Login')
+  const [isMounted, setIsMounted] = useState(false) // ⚠️ important for hydration
+
 
   const router = useRouter()
   const searchParams = useSearchParams()
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
+
     const role = searchParams.get('role')
     if (role === 'admin') {
       setHeading('Admin Login')
@@ -26,7 +34,8 @@ const LoginPage = () => {
     } else {
       setHeading('Login')
     }
-  }, [searchParams])
+  }, [searchParams, isMounted])
+
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
