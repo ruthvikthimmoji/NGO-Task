@@ -36,10 +36,10 @@ const FormPage = () => {
       .from('event_reports') // Replace with your table name
       .insert([{
         ngo_id: user?.id,
-        event,
         funds,
         people,
-        month : `${month}-01`
+        month : `${month}-01`,
+        event,
       }])
 
     setLoading(false)
@@ -47,8 +47,12 @@ const FormPage = () => {
     if (error) {
       console.error('Upload failed:', error.message)
       alert('Upload failed. Please try again.')
-    } else {
-      router.push('/userDashboard')
+    } else{
+      alert('Sucessfully Published')
+      setEvent('')
+      setFunds('')
+      setMonth('')
+      setPeople('')
     }
   }
 
@@ -90,7 +94,7 @@ const FormPage = () => {
           />
           <input
             type="text"
-            placeholder="Event"
+            placeholder="No of Events"
             value={event}
             onChange={(e) => setEvent(e.target.value)}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -98,7 +102,7 @@ const FormPage = () => {
           />
           <input
             type="text"
-            placeholder="Funds"
+            placeholder="Funds Utilised"
             value={funds}
             onChange={(e) => setFunds(e.target.value)}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -106,15 +110,15 @@ const FormPage = () => {
           />
           <input
             type="text"
-            placeholder="People"
+            placeholder="No of People helped"
             value={people}
             onChange={(e) => setPeople(e.target.value)}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <input
-            type="text"
-            placeholder="Month"
+            type="text" 
+            placeholder="Year and Month (eg : 2025-04)"
             value={month}
             onChange={(e) => setMonth(e.target.value)}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

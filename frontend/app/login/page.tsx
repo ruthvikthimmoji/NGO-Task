@@ -38,6 +38,7 @@ const LoginPage = () => {
       password,
     })
 
+
     if (error) {
       setError(error.message)
     } else {
